@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salsabil Rais — Embedded Systems & IoT Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #121212;
+      --bg-card: #1e1e1f;
+      --bg-card-inner: #232325;
+      --border-color: #383838;
+      --text-white: #fafafa;
+      --text-light: #d6d6d6;
+      --text-muted: #9f9f9f;
+      --accent-gold: #ffdb70;
+      --accent-gold-dim: rgba(255, 219, 112, 0.14);
+      --shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 25px;
+      align-items: start;
+    }
+
+    /* --- SIDEBAR --- */
+    .sidebar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
+      position: sticky;
+      top: 30px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .avatar-box {
+      width: 135px;
+      height: 135px;
+      margin: 0 auto 18px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #2b2b2c;
+      border: 2px solid var(--border-color);
+    }
+
+    .avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .name {
+      color: var(--text-white);
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .role-badge {
+      display: inline-block;
+      background: #2b2b2c;
+      color: var(--text-white);
+      font-size: 0.78rem;
+      font-weight: 400;
+      padding: 5px 14px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .pfe-badge {
+      display: inline-block;
+      background: var(--accent-gold-dim);
+      color: var(--accent-gold);
+      border: 1px solid rgba(255, 219, 112, 0.35);
+      font-size: 0.73rem;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border-color);
+      margin: 18px 0;
+    }
+
+    .contact-list {
+      list-style: none;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .icon-box {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      border-radius: 12px;
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      font-size: 1.15rem;
+    }
+
+    .contact-info span {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .contact-info a, .contact-info p {
+      color: var(--text-white);
+      font-size: 0.82rem;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .contact-info a:hover { color: var(--accent-gold); }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .social-links a {
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      transition: 0.25s;
+    }
+
+    .social-links a:hover {
+      color: var(--accent-gold);
+      transform: translateY(-2px);
+    }
+
+    /* --- MAIN CONTENT --- */
+    .main-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      box-shadow: var(--shadow);
+      min-height: 680px;
+    }
+
+    /* --- NAVBAR & LANG SWITCH --- */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 18px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: #282829;
+      padding: 6px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .nav-btn:hover { color: var(--accent-gold); }
+    .nav-btn.active {
+      color: var(--accent-gold);
+      background: rgba(255, 219, 112, 0.12);
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #282829;
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 12px;
+      color: var(--accent-gold);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .lang-toggle:hover {
+      background: var(--accent-gold-dim);
+    }
+
+    /* --- SECTIONS --- */
+    .page-section { display: none; animation: fadeIn 0.35s ease; }
+    .page-section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      color: var(--text-white);
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .title-bar {
+      width: 42px;
+      height: 5px;
+      background: var(--accent-gold);
+      border-radius: 4px;
+      margin-bottom: 22px;
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+      font-size: 0.94rem;
+      color: var(--text-light);
+    }
+
+    .sub-heading {
+      color: var(--text-white);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 28px 0 18px;
+    }
+
+    /* --- WHAT I'M DOING GRID --- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: 0.25s;
+    }
+
+    .service-card:hover {
+      border-color: rgba(255, 219, 112, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      color: var(--accent-gold);
+      min-width: 36px;
+      margin-top: 2px;
+    }
+
+    .service-card h4 {
+      color: var(--text-white);
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* --- RESUME TIMELINE --- */
+    .timeline {
+      border-left: 2px solid var(--border-color);
+      margin-left: 12px;
+      padding-left: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .timeline-item { position: relative; }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -31px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      box-shadow: 0 0 0 4px var(--accent-gold-dim);
+    }
+
+    .timeline-item h4 {
+      color: var(--text-white);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .timeline-date {
+      color: var(--accent-gold);
+      font-size: 0.82rem;
+      font-weight: 500;
+      margin: 3px 0 6px;
+      display: block;
+    }
+
+    .timeline-item p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* --- SKILLS TAGS --- */
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .skill-tag {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-color);
+      color: var(--text-white);
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 0.83rem;
+      font-weight: 500;
+    }
+
+    .skill-tag span { color: var(--accent-gold); margin-right: 5px; }
+
+    /* --- PROJECTS GRID --- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.25s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-3px);
+    }
+
+    .project-category {
+      color: var(--accent-gold);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 6px;
+    }
+
+    .project-card h4 {
+      color: var(--text-white);
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .project-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .project-tech span {
+      background: #18181a;
+      color: var(--text-light);
+      font-size: 0.73rem;
+      padding: 3px 9px;
+      border-radius: 6px;
+      border: 1px solid #303033;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-gold);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .project-link:hover { text-decoration: underline; }
+
+    /* --- ACHIEVEMENTS --- */
+    .achievement-card {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .trophy-icon {
+      font-size: 2.2rem;
+      color: var(--accent-gold);
+    }
+
+    /* --- CONTACT --- */
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .cta-box {
+      background: var(--bg-card-inner);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      text-align: center;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      background: var(--accent-gold);
+      color: #121212;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: 0.25s;
+    }
+
+    .cta-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    @media (max-width: 920px) {
+      .main-wrapper { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .services-grid, .projects-grid, .contact-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-wrapper">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="avatar-box">
+        <img src="./avatar.jpg" alt="Salsabil Rais" onerror="this.src='https://ui-avatars.com/api/?name=Salsabil+Rais&background=2b2b2c&color=ffdb70&size=256'" />
+      </div>
+      <h1 class="name">Salsabil Rais</h1>
+      <div class="role-badge" data-en="Embedded Systems & IoT Student" data-fr="Étudiante Systèmes Embarqués & IoT">Embedded Systems & IoT Student</div>
+      <br />
+      <div class="pfe-badge" data-en="🎯 PFE Internship: Apr – Jun 2027" data-fr="🎯 Stage PFE : Avr – Juin 2027">🎯 PFE Internship: Apr – Jun 2027</div>
+
+      <div class="divider"></div>
+
+      <ul class="contact-list">
+        <li class="contact-item">
+          <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
+          <div class="contact-info">
+            <span>Email</span>
+            <a href="mailto:salsabil.rais.es@gmail.com">salsabil.rais.es@gmail.com</a>
+          </div>
+        </li>
+        <li class="contact-item">
+          <div class="icon-box"><ion-icon name="school-outline"></ion-icon></div>
+          <div class="contact-info">
+            <span data-en="University" data-fr="Établissement">University</span>
+            <p>FST Tangier (UAE)</p>
+          </div>
+        </li>
+        <li class="contact-item">
+          <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
+          <div class="contact-info">
+            <span data-en="Location" data-fr="Localisation">Location</span>
+            <p data-en="Morocco" data-fr="Maroc">Morocco</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="social-links">
+        <a href="https://github.com/SalsabilRais" target="_blank" title="GitHub"><ion-icon name="logo-github"></ion-icon></a>
+        <a href="https://linkedin.com/in/salsabil-rais" target="_blank" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+        <a href="https://instagram.com/our_world_3d" target="_blank" title="3D Design Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <div class="top-bar">
+        <nav class="nav-tabs">
+          <button class="nav-btn active" onclick="showTab('about', this)" data-en="About" data-fr="À propos">About</button>
+          <button class="nav-btn" onclick="showTab('resume', this)" data-en="Resume" data-fr="Parcours">Resume</button>
+          <button class="nav-btn" onclick="showTab('projects', this)" data-en="Projects" data-fr="Projets">Projects</button>
+          <button class="nav-btn" onclick="showTab('achievements', this)" data-en="Achievements" data-fr="Distinctions">Achievements</button>
+          <button class="nav-btn" onclick="showTab('contact', this)" data-en="Contact" data-fr="Contact">Contact</button>
+        </nav>
+
+        <button class="lang-toggle" onclick="toggleLanguage()" id="langBtn">
+          <ion-icon name="language-outline"></ion-icon>
+          <span id="langLabel">FR</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: ABOUT -->
+      <section id="about" class="page-section active">
+        <h2 class="section-title" data-en="About Me" data-fr="À Propos de Moi">About Me</h2>
+        <div class="title-bar"></div>
+
+        <div class="about-text">
+          <p data-en="I am an Embedded Systems & IoT student at the Faculty of Sciences and Techniques of Tangier (FST Tangier), passionate about designing intelligent hardware-software architectures, real-time control systems, and connected devices."
+             data-fr="Étudiante en Systèmes Embarqués et IoT à la Faculté des Sciences et Techniques de Tanger (FST Tanger), je suis passionnée par la conception d'architectures matérielles et logicielles intelligentes, le contrôle temps réel et les objets connectés.">
+            I am an Embedded Systems & IoT student at the Faculty of Sciences and Techniques of Tangier (FST Tangier), passionate about designing intelligent hardware-software architectures, real-time control systems, and connected devices.
+          </p>
+          <p data-en="Through hands-on projects with ESP32, Arduino, Microchip microcontrollers, VHDL, and Computer Vision (OpenCV), I bridge electronics and software to solve real-world engineering challenges. I am currently seeking a final-year internship (PFE) from April to June 2027."
+             data-fr="À travers mes projets pratiques sur ESP32, Arduino, microcontrôleurs Microchip, VHDL et Vision par Ordinateur (OpenCV), j'allie électronique et logiciel pour résoudre des défis techniques concrets. Je recherche actuellement un stage de fin d'études (PFE) d'avril à juin 2027.">
+            Through hands-on projects with ESP32, Arduino, Microchip microcontrollers, VHDL, and Computer Vision (OpenCV), I bridge electronics and software to solve real-world engineering challenges. I am currently seeking a final-year internship (PFE) from April to June 2027.
+          </p>
+        </div>
+
+        <h3 class="sub-heading" data-en="What I'm Doing" data-fr="Mes Domaines d'Expertise">What I'm Doing</h3>
+        <div class="services-grid">
+          <div class="service-card">
+            <ion-icon class="service-icon" name="hardware-chip-outline"></ion-icon>
+            <div>
+              <h4 data-en="Embedded Systems & Firmware" data-fr="Systèmes Embarqués & Firmware">Embedded Systems & Firmware</h4>
+              <p data-en="Low-level C/C++ firmware development, peripheral interfacing, and real-time control on ESP32, Arduino, and Microchip."
+                 data-fr="Développement firmware bas niveau en C/C++, interfaçage de capteurs et contrôle temps réel sur ESP32, Arduino et Microchip.">
+                Low-level C/C++ firmware development, peripheral interfacing, and real-time control on ESP32, Arduino, and Microchip.
+              </p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <ion-icon class="service-icon" name="wifi-outline"></ion-icon>
+            <div>
+              <h4 data-en="IoT & Embedded Web Servers" data-fr="IoT & Serveurs Web Embarqués">IoT & Embedded Web Servers</h4>
+              <p data-en="Wi-Fi telemetry, real-time sensor dashboards, and remote hardware actuation via embedded HTTP servers."
+                 data-fr="Télémétrie Wi-Fi, tableaux de bord temps réel et contrôle d'actionneurs à distance via serveurs HTTP embarqués.">
+                Wi-Fi telemetry, real-time sensor dashboards, and remote hardware actuation via embedded HTTP servers.
+              </p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <ion-icon class="service-icon" name="eye-outline"></ion-icon>
+            <div>
+              <h4 data-en="Robotics & Computer Vision" data-fr="Robotique & Vision par Ordinateur">Robotics & Computer Vision</h4>
+              <p data-en="Autonomous mobile robots, line-tracking algorithms, and Python/OpenCV real-time safety detection systems."
+                 data-fr="Robots mobiles autonomes, algorithmes de suivi de ligne et systèmes de sécurité temps réel avec Python et OpenCV.">
+                Autonomous mobile robots, line-tracking algorithms, and Python/OpenCV real-time safety detection systems.
+              </p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <ion-icon class="service-icon" name="cube-outline"></ion-icon>
+            <div>
+              <h4 data-en="3D CAD & Digital Logic" data-fr="Conception 3D & Logique Numérique">3D CAD & Digital Logic</h4>
+              <p data-en="Mechanical prototyping in SolidWorks and digital circuit design using VHDL."
+                 data-fr="Prototypage mécanique sous SolidWorks et conception de circuits numériques en langage VHDL.">
+                Mechanical prototyping in SolidWorks and digital circuit design using VHDL.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: RESUME -->
+      <section id="resume" class="page-section">
+        <h2 class="section-title" data-en="Resume & Skills" data-fr="Parcours & Compétences">Resume & Skills</h2>
+        <div class="title-bar"></div>
+
+        <h3 class="sub-heading" data-en="Education & Leadership" data-fr="Formation & Engagements">Education & Leadership</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4 data-en="Bachelor / Engineering Track in Embedded Systems" data-fr="Formation en Systèmes Embarqués">Bachelor / Engineering Track in Embedded Systems</h4>
+            <span class="timeline-date">FST Tangier — Abdelmalek Essaâdi University | 2024 – 2027</span>
+            <p data-en="Microcontrollers, Real-Time Systems, Digital Electronics (VHDL), C/C++ Programming, Signal Processing, and IoT Architectures."
+               data-fr="Microcontrôleurs, Systèmes Temps Réel, Électronique Numérique (VHDL), Programmation C/C++, Traitement du Signal et Architectures IoT.">
+              Microcontrollers, Real-Time Systems, Digital Electronics (VHDL), C/C++ Programming, Signal Processing, and IoT Architectures.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <h4 data-en="Active Member — Robotech Club & Code212" data-fr="Membre Actif — Robotech Club & Code212">Active Member — Robotech Club & Code212</h4>
+            <span class="timeline-date">FST Tangier | 2024 – Present</span>
+            <p data-en="Designing autonomous competition robots, rapid hardware prototyping, and collaborative software development."
+               data-fr="Conception de robots autonomes de compétition, prototypage matériel rapide et développement logiciel collaboratif.">
+              Designing autonomous competition robots, rapid hardware prototyping, and collaborative software development.
+            </p>
+          </div>
+        </div>
+
+        <h3 class="sub-heading" data-en="Technical Stack" data-fr="Compétences Techniques">Technical Stack</h3>
+        <div class="skills-wrap">
+          <div class="skill-tag"><span>#</span>Embedded C / C++</div>
+          <div class="skill-tag"><span>#</span>Python</div>
+          <div class="skill-tag"><span>#</span>VHDL</div>
+          <div class="skill-tag"><span>#</span>ESP32</div>
+          <div class="skill-tag"><span>#</span>Arduino</div>
+          <div class="skill-tag"><span>#</span>Microchip PIC</div>
+          <div class="skill-tag"><span>#</span>OpenCV</div>
+          <div class="skill-tag"><span>#</span>SolidWorks (3D CAD)</div>
+          <div class="skill-tag"><span>#</span>mBlock / Robotics</div>
+          <div class="skill-tag"><span>#</span>HTML5 / CSS3 / HTTP</div>
+          <div class="skill-tag"><span>#</span>Git & GitHub</div>
+          <div class="skill-tag"><span>#</span>Notion</div>
+        </div>
+      </section>
+
+      <!-- TAB 3: PROJECTS -->
+      <section id="projects" class="page-section">
+        <h2 class="section-title" data-en="Featured Projects" data-fr="Projets Réalisés">Featured Projects</h2>
+        <div class="title-bar"></div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card">
+            <div>
+              <div class="project-category">Computer Vision & Safety</div>
+              <h4>Driver Alert System</h4>
+              <p data-en="Real-time driver drowsiness and distraction detection system using facial landmark tracking and audio-visual alerts."
+                 data-fr="Système temps réel de détection de somnolence et de distraction du conducteur par analyse faciale et alertes visuelles/sonores.">
+                Real-time driver drowsiness and distraction detection system using facial landmark tracking and audio-visual alerts.
+              </p>
+              <div class="project-tech">
+                <span>Python</span><span>OpenCV</span><span>Computer Vision</span>
+              </div>
+            </div>
+            <a class="project-link" href="https://github.com/SalsabilRais/Driver-Alert-System" target="_blank">
+              <ion-icon name="logo-github"></ion-icon> <span data-en="View on GitHub" data-fr="Voir sur GitHub">View on GitHub</span>
+            </a>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card">
+            <div>
+              <div class="project-category">Robotics & Wi-Fi Control</div>
+              <h4>ESP32 RC Car Controller</h4>
+              <p data-en="4-wheel mobile robot controlled wirelessly via a custom responsive web joystick hosted on an ESP32 Access Point."
+                 data-fr="Robot mobile à 4 roues piloté sans fil via une interface web de contrôle hébergée sur un point d'accès Wi-Fi ESP32.">
+                4-wheel mobile robot controlled wirelessly via a custom responsive web joystick hosted on an ESP32 Access Point.
+              </p>
+              <div class="project-tech">
+                <span>ESP32</span><span>C++</span><span>L298N</span><span>Wi-Fi AP</span>
+              </div>
+            </div>
+            <a class="project-link" href="https://github.com/SalsabilRais/ESP32-RC-Car-Controller" target="_blank">
+              <ion-icon name="logo-github"></ion-icon> <span data-en="View on GitHub" data-fr="Voir sur GitHub">View on GitHub</span>
+            </a>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="project-card">
+            <div>
+              <div class="project-category">IoT & Embedded Web</div>
+              <h4>ESP32 Weather Station</h4>
+              <p data-en="Environmental monitoring station with DHT11 sensor, RGB LED thermal alerts, and live dark-mode circular gauges."
+                 data-fr="Station météo connectée avec capteur DHT11, indicateur thermique LED RGB et tableau de bord web à jauges circulaires.">
+                Environmental monitoring station with DHT11 sensor, RGB LED thermal alerts, and live dark-mode circular gauges.
+              </p>
+              <div class="project-tech">
+                <span>ESP32</span><span>DHT11</span><span>HTTP Server</span><span>CSS3</span>
+              </div>
+            </div>
+            <a class="project-link" href="https://github.com/SalsabilRais/ESP32-Weather-Station" target="_blank">
+              <ion-icon name="logo-github"></ion-icon> <span data-en="View on GitHub" data-fr="Voir sur GitHub">View on GitHub</span>
+            </a>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="project-card">
+            <div>
+              <div class="project-category">Autonomous Robotics (🥈 2nd Place)</div>
+              <h4>Line Follower Robot (mBot2)</h4>
+              <p data-en="High-speed autonomous line-tracking robot engineered for the Robotech Club competition using closed-loop optical sensor control."
+                 data-fr="Robot suiveur de ligne autonome conçu pour la compétition Robotech Club avec régulation différentielle en boucle fermée.">
+                High-speed autonomous line-tracking robot engineered for the Robotech Club competition using closed-loop optical sensor control.
+              </p>
+              <div class="project-tech">
+                <span>mBot2</span><span>CyberPi</span><span>mBlock</span><span>Sensors</span>
+              </div>
+            </div>
+            <a class="project-link" href="https://github.com/SalsabilRais/Line-Follower-Robot-mBot2" target="_blank">
+              <ion-icon name="logo-github"></ion-icon> <span data-en="View on GitHub" data-fr="Voir sur GitHub">View on GitHub</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: ACHIEVEMENTS -->
+      <section id="achievements" class="page-section">
+        <h2 class="section-title" data-en="Achievements & Awards" data-fr="Distinctions & Réalisations">Achievements & Awards</h2>
+        <div class="title-bar"></div>
+
+        <div class="achievement-card">
+          <div class="trophy-icon">🥈</div>
+          <div>
+            <h4 style="color: var(--text-white);" data-en="2nd Place — mBot2 Robotics Competition" data-fr="2ᵉ Prix — Compétition de Robotique mBot2">2nd Place — mBot2 Robotics Competition</h4>
+            <span class="timeline-date">Robotech Club — FST Tangier</span>
+            <p style="font-size: 0.88rem; color: var(--text-muted);"
+               data-en="Awarded 2nd place for designing, calibrating, and programming a high-speed autonomous line-following robot under strict competition time constraints."
+               data-fr="Récompensée par le 2ᵉ prix pour la conception, le calibrage et la programmation d'un robot suiveur de ligne autonome sous contraintes temps réel.">
+              Awarded 2nd place for designing, calibrating, and programming a high-speed autonomous line-following robot under strict competition time constraints.
+            </p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="trophy-icon">🚀</div>
+          <div>
+            <h4 style="color: var(--text-white);" data-en="Active Engineering Community Contributor" data-fr="Membre Active des Clubs d'Ingénierie">Active Engineering Community Contributor</h4>
+            <span class="timeline-date">Code212 & Robotech Club (FST Tangier)</span>
+            <p style="font-size: 0.88rem; color: var(--text-muted);"
+               data-en="Participating in embedded systems workshops, hardware hackathons, and 3D CAD prototyping initiatives."
+               data-fr="Participation active aux ateliers systèmes embarqués, hackathons hardware et projets de modélisation 3D.">
+              Participating in embedded systems workshops, hardware hackathons, and 3D CAD prototyping initiatives.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: CONTACT -->
+      <section id="contact" class="page-section">
+        <h2 class="section-title" data-en="Get In Touch" data-fr="Me Contacter">Get In Touch</h2>
+        <div class="title-bar"></div>
+
+        <p style="font-size: 0.94rem; color: var(--text-light);"
+           data-en="I am actively looking for a Final-Year Internship (PFE) in Embedded Systems, IoT, or Robotics from April to June 2027. Feel free to reach out via email or LinkedIn!"
+           data-fr="Je suis activement à la recherche d'un Stage de Fin d'Études (PFE) en Systèmes Embarqués, IoT ou Robotique d'avril à juin 2027. N'hésitez pas à me contacter par email ou sur LinkedIn !">
+          I am actively looking for a Final-Year Internship (PFE) in Embedded Systems, IoT, or Robotics from April to June 2027. Feel free to reach out via email or LinkedIn!
+        </p>
+
+        <div class="contact-cards">
+          <div class="cta-box">
+            <ion-icon style="font-size: 2.2rem; color: var(--accent-gold);" name="mail-open-outline"></ion-icon>
+            <h4 style="color: var(--text-white); margin-top: 8px;">Email</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">salsabil.rais.es@gmail.com</p>
+            <a class="cta-btn" href="mailto:salsabil.rais.es@gmail.com">
+              <ion-icon name="send-outline"></ion-icon> <span data-en="Send an Email" data-fr="Envoyer un Email">Send an Email</span>
+            </a>
+          </div>
+
+          <div class="cta-box">
+            <ion-icon style="font-size: 2.2rem; color: var(--accent-gold);" name="logo-linkedin"></ion-icon>
+            <h4 style="color: var(--text-white); margin-top: 8px;">LinkedIn</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">linkedin.com/in/salsabil-rais</p>
+            <a class="cta-btn" href="https://linkedin.com/in/salsabil-rais" target="_blank">
+              <ion-icon name="open-outline"></ion-icon> <span data-en="Connect on LinkedIn" data-fr="Voir mon LinkedIn">Connect on LinkedIn</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    let currentLang = 'en';
+
+    function showTab(tabId, btnElement) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btnElement.classList.add('active');
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'fr' : 'en';
+      document.getElementById('langLabel').textContent = currentLang === 'en' ? 'FR' : 'EN';
+      document.documentElement.lang = currentLang;
+
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currentLang);
+      });
+    }
+  </script>
+</body>
+</html>
