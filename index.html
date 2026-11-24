@@ -664,7 +664,7 @@
 
     .project-link:hover { text-decoration: underline; }
 
-    /* --- ACHIEVEMENTS --- */
+    /* --- ACHIEVEMENTS & CERTIFICATES --- */
     .achievement-card {
       background: var(--bg-card-inner);
       border: 1px solid var(--border-color);
@@ -672,11 +672,120 @@
       padding: 20px;
       margin-bottom: 16px;
       display: flex;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      transition: 0.25s;
+    }
+
+    .achievement-card:hover {
+      border-color: var(--accent);
+    }
+
+    .achievement-left {
+      display: flex;
       gap: 16px;
       align-items: center;
     }
 
-    .trophy-icon { font-size: 2.2rem; }
+    .trophy-icon { font-size: 2.2rem; min-width: 42px; text-align: center; }
+
+    .cert-preview-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 140px;
+    }
+
+    .cert-thumb {
+      width: 140px;
+      height: 98px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .cert-thumb:hover {
+      border-color: var(--accent);
+      transform: scale(1.04);
+    }
+
+    .cert-view-btn {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: 0.2s;
+    }
+
+    .cert-view-btn:hover {
+      background: var(--accent);
+      color: #121212;
+    }
+
+    /* --- LIGHTBOX MODAL --- */
+    .cert-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cert-modal.open {
+      display: flex;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .cert-modal-content {
+      position: relative;
+      max-width: 860px;
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--accent);
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .cert-modal-content img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .cert-modal-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #121212;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* --- CONTACT --- */
     .contact-cards {
@@ -715,6 +824,8 @@
       .main-wrapper { grid-template-columns: 1fr; }
       .sidebar { position: static; }
       .services-grid, .projects-grid, .contact-cards, .skills-categories { grid-template-columns: 1fr; }
+      .achievement-card { flex-direction: column; align-items: flex-start; }
+      .cert-preview-box { width: 100%; flex-direction: row; justify-content: flex-start; }
     }
   </style>
 </head>
@@ -1119,54 +1230,74 @@
         <div class="title-bar"></div>
 
         <div class="achievement-card">
-          <div class="trophy-icon">🛰️</div>
-          <div>
-            <h4 style="color: var(--text-white);" data-en="ADCS & Navigation Lead — 2U CubeSat Team" data-fr="Chargée ADCS & Navigation — Équipe CubeSat 2U">ADCS & Navigation Lead — 2U CubeSat Team</h4>
-            <span class="timeline-date">GreenLab Fablab Tanger | Oct 2026 – Present</span>
-            <p style="font-size: 0.88rem; color: var(--text-muted);"
-               data-en="Selected within an 18-member engineering team building a 2U CubeSat nanosatellite, responsible for the ADCS & Navigation subsystem."
-               data-fr="Sélectionnée au sein d'une équipe de 18 membres développant un nanosatellite CubeSat 2U, en charge du sous-système ADCS & Navigation.">
-              Selected within an 18-member engineering team building a 2U CubeSat nanosatellite, responsible for the ADCS & Navigation subsystem.
-            </p>
+          <div class="achievement-left">
+            <div class="trophy-icon">🛰️</div>
+            <div>
+              <h4 style="color: var(--text-white);" data-en="ADCS & Navigation Lead — 2U CubeSat Team" data-fr="Chargée ADCS & Navigation — Équipe CubeSat 2U">ADCS & Navigation Lead — 2U CubeSat Team</h4>
+              <span class="timeline-date">GreenLab Fablab Tanger | Oct 2026 – Present</span>
+              <p style="font-size: 0.88rem; color: var(--text-muted);"
+                 data-en="Selected within an 18-member engineering team building a 2U CubeSat nanosatellite, responsible for the ADCS & Navigation subsystem."
+                 data-fr="Sélectionnée au sein d'une équipe de 18 membres développant un nanosatellite CubeSat 2U, en charge du sous-système ADCS & Navigation.">
+                Selected within an 18-member engineering team building a 2U CubeSat nanosatellite, responsible for the ADCS & Navigation subsystem.
+              </p>
+            </div>
           </div>
         </div>
 
         <div class="achievement-card">
-          <div class="trophy-icon">🥈</div>
-          <div>
-            <h4 style="color: var(--text-white);" data-en="Certificate of 2nd Place — Robotics Competition (mBot2)" data-fr="Certificat de la 2ème place — Compétition de Robotique (mBot2)">Certificate of 2nd Place — Robotics Competition (mBot2)</h4>
-            <span class="timeline-date">Robotech Club — FST Tangier (2024 – 2026)</span>
-            <p style="font-size: 0.88rem; color: var(--text-muted);"
-               data-en="Awarded 2nd place for designing, calibrating, and programming a high-speed autonomous line-following robot under strict competition time constraints."
-               data-fr="Récompensée par le 2ᵉ prix pour la conception, le calibrage et la programmation d'un robot suiveur de ligne autonome sous contraintes temps réel.">
-              Awarded 2nd place for designing, calibrating, and programming a high-speed autonomous line-following robot under strict competition time constraints.
-            </p>
+          <div class="achievement-left">
+            <div class="trophy-icon">🥈</div>
+            <div>
+              <h4 style="color: var(--text-white);" data-en="Certificate of 2nd Place — Robotics Competition (mBot2)" data-fr="Certificat de la 2ème place — Compétition de Robotique (mBot2)">Certificate of 2nd Place — Robotics Competition (mBot2)</h4>
+              <span class="timeline-date">Robotech Club — FST Tangier (Signed by Dean Pr. Mustapha Diani)</span>
+              <p style="font-size: 0.88rem; color: var(--text-muted);"
+                 data-en="Awarded 2nd place for designing, calibrating, and programming a high-speed autonomous line-following robot under strict competition time constraints."
+                 data-fr="Récompensée par le 2ᵉ prix pour la conception, le calibrage et la programmation d'un robot suiveur de ligne autonome sous contraintes temps réel.">
+                Awarded 2nd place for designing, calibrating, and programming a high-speed autonomous line-following robot under strict competition time constraints.
+              </p>
+            </div>
+          </div>
+          <div class="cert-preview-box">
+            <img class="cert-thumb" src="./certificat_mbot_competition.jpeg" alt="2nd Place Robotics Certificate" onclick="openCert('./certificat_mbot_competition.jpeg')" />
+            <button class="cert-view-btn" onclick="openCert('./certificat_mbot_competition.jpeg')">
+              <ion-icon name="eye-outline"></ion-icon> <span data-en="View Certificate" data-fr="Voir le certificat">View Certificate</span>
+            </button>
           </div>
         </div>
 
         <div class="achievement-card">
-          <div class="trophy-icon">☁️</div>
-          <div>
-            <h4 style="color: var(--text-white);" data-en="HCIA Training (AI & Cloud Computing)" data-fr="Formations HCIA (AI & Cloud Computing)">HCIA Training (AI & Cloud Computing)</h4>
-            <span class="timeline-date" data-en="Huawei E-Talent | In progress" data-fr="Huawei E-Talent | En cours">Huawei E-Talent | In progress</span>
-            <p style="font-size: 0.88rem; color: var(--text-muted);"
-               data-en="Huawei ICT Academy certification tracks in Artificial Intelligence and Cloud Computing."
-               data-fr="Parcours de certification Huawei ICT Academy en Intelligence Artificielle et Cloud Computing.">
-              Huawei ICT Academy certification tracks in Artificial Intelligence and Cloud Computing.
-            </p>
+          <div class="achievement-left">
+            <div class="trophy-icon">⚙️</div>
+            <div>
+              <h4 style="color: var(--text-white);" data-en="Certificate of Participation — Mechanical Design Workshop" data-fr="Certificat de Participation — Mechanical Design Workshop">Certificate of Participation — Mechanical Design Workshop</h4>
+              <span class="timeline-date">Robotech Club — FST Tangier | Dec 6, 2024</span>
+              <p style="font-size: 0.88rem; color: var(--text-muted);"
+                 data-en="Hands-on CAD and mechanical design workshop organized by Robotech Club at FST Tangier."
+                 data-fr="Atelier pratique de conception mécanique et CAO organisé par le Club Robotech à la FST Tanger.">
+                Hands-on CAD and mechanical design workshop organized by Robotech Club at FST Tangier.
+              </p>
+            </div>
+          </div>
+          <div class="cert-preview-box">
+            <img class="cert-thumb" src="./certificat-mechanical_workshop.jpeg" alt="Mechanical Design Workshop Certificate" onclick="openCert('./certificat-mechanical_workshop.jpeg')" />
+            <button class="cert-view-btn" onclick="openCert('./certificat-mechanical_workshop.jpeg')">
+              <ion-icon name="eye-outline"></ion-icon> <span data-en="View Certificate" data-fr="Voir le certificat">View Certificate</span>
+            </button>
           </div>
         </div>
 
         <div class="achievement-card">
-          <div class="trophy-icon">⚙️</div>
-          <div>
-            <h4 style="color: var(--text-white);" data-en="Certificate of Participation — Mechanical Design Workshop" data-fr="Certificate of Participation — Mechanical Design Workshop">Certificate of Participation — Mechanical Design Workshop</h4>
-            <span class="timeline-date">Robotech Club — FST Tangier</span>
-            <p style="font-size: 0.88rem; color: var(--text-muted);"
-               data-en="Hands-on CAD and mechanical design workshop organized by Robotech Club."
-               data-fr="Atelier pratique de conception mécanique et CAO organisé par le Club Robotech.">
-              Hands-on CAD and mechanical design workshop organized by Robotech Club.
-            </p>
+          <div class="achievement-left">
+            <div class="trophy-icon">☁️</div>
+            <div>
+              <h4 style="color: var(--text-white);" data-en="HCIA Training (AI & Cloud Computing)" data-fr="Formations HCIA (AI & Cloud Computing)">HCIA Training (AI & Cloud Computing)</h4>
+              <span class="timeline-date" data-en="Huawei E-Talent | In progress" data-fr="Huawei E-Talent | En cours">Huawei E-Talent | In progress</span>
+              <p style="font-size: 0.88rem; color: var(--text-muted);"
+                 data-en="Huawei ICT Academy certification tracks in Artificial Intelligence and Cloud Computing."
+                 data-fr="Parcours de certification Huawei ICT Academy en Intelligence Artificielle et Cloud Computing.">
+                Huawei ICT Academy certification tracks in Artificial Intelligence and Cloud Computing.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -1205,6 +1336,14 @@
     </main>
   </div>
 
+  <!-- MODAL PLEIN ÉCRAN CERTIFICAT -->
+  <div id="certModal" class="cert-modal" onclick="closeCert(event)">
+    <div class="cert-modal-content">
+      <button class="cert-modal-close" onclick="document.getElementById('certModal').classList.remove('open')">&times;</button>
+      <img id="certModalImg" src="" alt="Certificate Preview" />
+    </div>
+  </div>
+
   <script>
     let currentLang = 'en';
 
@@ -1227,6 +1366,17 @@
       document.querySelectorAll('[data-en]').forEach(el => {
         el.textContent = el.getAttribute('data-' + currentLang);
       });
+    }
+
+    function openCert(imgSrc) {
+      document.getElementById('certModalImg').src = imgSrc;
+      document.getElementById('certModal').classList.add('open');
+    }
+
+    function closeCert(event) {
+      if (event.target.id === 'certModal') {
+        document.getElementById('certModal').classList.remove('open');
+      }
     }
   </script>
 </body>
